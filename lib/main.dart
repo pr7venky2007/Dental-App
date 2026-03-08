@@ -1,45 +1,65 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'instruction_page.dart';
 
-void main() => runApp(
-      MaterialApp(
-        home: BallPage(),
-      ),
-    );
+void main() {
+  runApp(MyApp());
+}
 
-class BallPage extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      appBar: AppBar(
-        backgroundColor: Colors.blue.shade900,
-        title: Text('Ask Me Anything'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Tiny Tooth',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      body: Ball(),
+      home: HomePage(),
     );
   }
 }
 
-class Ball extends StatefulWidget {
-  @override
-  State<Ball> createState() => _BallState();
-}
-
-class _BallState extends State<Ball> {
-  int ballNumber = 1;
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton(
-          onPressed: () {
-            setState(() {
-              ballNumber = Random().nextInt(5) + 1;
-            });
-          },
-          child: Image.asset('images/ball$ballNumber.png')
-      )
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text('Tiny Tooth'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/background image.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                'images/icons.png',
+                height: 150,
+              ),
+              SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WARNINGS()),
+                  );
+                },
+                child: Text('Start'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
